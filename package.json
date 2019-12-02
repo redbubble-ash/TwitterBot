@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "brain.js": "^2.0.0-alpha.9",
+    "fs": "0.0.1-security",
     "twit": "^2.2.11"
   }
 }
