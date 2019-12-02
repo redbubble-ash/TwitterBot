@@ -1,6 +1,8 @@
 const brain = require("brain.js");
 const fs = require("fs");
 
+const data =require('./data.json');
+
 var learnt = null;
 try {
   learnt = require("./trained_net.json");
@@ -17,8 +19,8 @@ if (learnt != null) {
   else {
 
     const trainingData = data.map(item =>({
-        input: item.text,
-        output: item.category
+        input: item.tweet,
+        output: item.user
     }));
     
     network.train(trainingData,{
@@ -32,4 +34,4 @@ if (learnt != null) {
 
 const output = network.run('I fixed the power supply');
 
-console.log(`Category: ${output}`);
+console.log(`User: ${output}`);
