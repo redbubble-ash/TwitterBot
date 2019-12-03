@@ -1,8 +1,8 @@
 const brain = require("brain.js");
 const fs = require("fs");
 
-const trumpdata =require('./trump_tweets.json');
-const obamadata = require('./obama_tweets.json');
+const trumpdata =require('./BarackObama.json');
+const obamadata = require('./realDonaldTrump.json');
 const data = trumpdata.concat(obamadata);
 // console.log(data);
 
