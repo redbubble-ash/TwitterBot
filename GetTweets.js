@@ -5,19 +5,26 @@ const fs = require("fs");
 
 //Twit package function that gets the latest number of tweets asked for from the T.get function.
 function searchedData(err, data, response) {
-    let newdata = data.map(function (element) {
-        if (element.full_text.substring(0, 2) !== "RT") {
-            
-            var item = {
-                input: element.full_text,
-                output: element.user.name
-            }
+    // Filter out any of the results that are retweets
+    var newdata = data.filter(
+        element => element.full_text.substring(0, 2) !== "RT"
+    );
+
+    //Create Map object of the two useful fields
+    newdata = newdata.map(function (element) {
+        var item = {
+            input: element.full_text,
+            output: element.user.name
+        };
+        if (currentUser !== element.user.screen_name) {
             currentUser = element.user.screen_name;
-            
-            if (item !== null) return item;
         }
+
+        if (item !== null) return item;
+
     });
-    
+
+    //Convert to JSON and save it to a file named {TwitterUserName}.json
     let result = JSON.stringify(newdata);
     fs.writeFileSync(`${currentUser}.json`, result);
 }

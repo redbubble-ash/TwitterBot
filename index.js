@@ -1,7 +1,10 @@
 const brain = require("brain.js");
 const fs = require("fs");
 
-const data =require('./data.json');
+const trumpdata =require('./BarackObama.json');
+const obamadata = require('./realDonaldTrump.json');
+const data = trumpdata.concat(obamadata);
+// console.log(data);
 
 var learnt = null;
 try {
@@ -19,12 +22,12 @@ if (learnt != null) {
   else {
 
     const trainingData = data.map(item =>({
-        input: item.tweet,
-        output: item.user
+        input: item.input,
+        output: item.output
     }));
     
     network.train(trainingData,{
-        iterations: 20
+        iterations: 100
     });
   
     var run = JSON.stringify(network.toJSON());
@@ -32,6 +35,5 @@ if (learnt != null) {
   }
   
 
-const output = network.run('I fixed the power supply');
-
+const output = network.run("when america is united, america is totally unstoppable.");
 console.log(`User: ${output}`);
